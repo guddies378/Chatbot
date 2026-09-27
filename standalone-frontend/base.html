@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="app.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="container">
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="./images/UEP Logo.png" alt="image">
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">University Chatbot</h4>
+                    <p class="chatbox__description--header">Hi! How am I able to assist you today?</p>
+                </div>
+                <div class="chatbox__status">
+                    <span id="chatbot-status" class="offline">Offline</span>
+                </div>
+            </div>
+            <div class="chatbox__messages">
+                <div id="faq-section">
+                    <p class="disclaimer">The University Chatbot is powered by AI, so mistakes are possible. Users are advised to be patient when using it.</p>
+                    <h4>Frequently Asked Questions (FAQ)</h4>
+                    <ul id="faq-list">
+                        <!-- FAQ items will be dynamically added here -->
+                    </ul>
+                </div>
+                <div id="chat-messages"></div>
+            </div>
+            <div class="chatbox__footer">
+                <input type="text" placeholder="Write a message...">
+                <button class="chatbox__send--footer send__button"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="25" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 15 16">
+                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                  </svg></button>
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button><img src="./images/Chatbot Button.png" /></button>
+        </div>
+    </div>
+</div>
+
+    <script src="./app.js"></script>
+
+</body>
+</html>

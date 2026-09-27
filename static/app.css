@@ -1,0 +1,409 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 100%;
+    background: #F1F1F1;
+}
+
+*, html {
+    --primaryGradient: linear-gradient(93.12deg, #0000CD 0.52%, #00008B 100%);
+    --secondaryGradient: linear-gradient(268.91deg, #0000CD -2.14%, #00008B 99.69%);
+    --primaryBoxShadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    --secondaryBoxShadow: 0px -10px 15px rgba(0, 0, 0, 0.1);
+    --primary: #0000CD;
+}
+
+/* CHATBOX
+=============== */
+.chatbox {
+    position: fixed;
+    bottom: 10px; /* Move closer to the button */
+    right: 20px; /* Move closer to the button */
+    z-index: 9999;
+}
+
+/* CONTENT IS CLOSE */
+.chatbox__support {
+    display: flex;
+    flex-direction: column;
+    background: #eee;
+    width: 600px;
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    transform: translateY(0); /* Adjust this value to move the chatbox closer to the button */
+}
+
+/* CONTENT ISOPEN */
+.chatbox--active {
+    transform: translateY(-5px); /* Adjust this value to move the chatbox closer to the button */
+    z-index: 123456;
+    opacity: 1;
+}
+
+/* BUTTON */
+.chatbox__button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.chatbox__button button {
+    background: none; /* Remove background color */
+    border: none; /* Remove borders */
+    padding: 0; /* Remove padding */
+    cursor: pointer;
+    box-shadow: none; /* Remove any shadow */
+}
+
+.chatbox__button img {
+    width: 80px; /* Increase size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0; /* Ensure no rounded corners */
+    display: block; /* Make sure the image takes full width */
+    background-color: transparent; /* Ensure background is transparent */
+    margin: 0; /* Ensure no margins around the image */
+}
+
+.send__button {
+    padding: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* MESSAGES */
+.chatbox__messages {
+    margin-top: auto;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column-reverse;
+    padding: 20px;
+    height: 100%;
+    scroll-behavior: smooth; /* Add smooth scrolling */
+    max-height: 100%;
+}
+
+.messages__item {
+    background: orange;
+    max-width: 90%; /* Increase max-width to handle longer messages */
+    width: fit-content;
+    word-wrap: break-word; /* Ensure long words break to the next line */
+    padding: 15px 20px; /* Add padding for better readability */
+    margin-bottom: 5px; /* Add margin between messages */
+    border-radius: 25px; /* Add border radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow for a professional look */
+    line-height: 1.6; /* Improve line height for readability */
+    white-space: pre-wrap; /* Allow text to wrap */
+    overflow-wrap: break-word; /* Ensure long words break to the next line */
+    font-size: 1rem; /* Adjust font size */
+    position: relative; /* Add relative positioning */
+}
+
+.messages__item p {
+    margin: 0 0 10px; /* Add margin to paragraphs */
+}
+
+.messages__item ul, .messages__item ol {
+    margin: 10px 0; /* Add margin to lists */
+    padding-left: 20px; /* Add padding to the left of lists */
+}
+
+.messages__item a {
+    color: white; /* Set link color to white */
+    text-decoration: underline; /* Underline the links */
+}
+
+.messages__item a:hover {
+    color: #ddd; /* Change color on hover for better visibility */
+}
+
+.messages__item--visitor {
+    margin-left: auto;
+    margin-right: 0;
+    background: #E0E0E0;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 0;
+}
+
+.messages__item--operator {
+    margin-right: auto;
+    margin-left: 0;
+    background: var(--primary);
+    color: white;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    text-align: left; /* Align text to the left */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    padding-left: 20px; /* Add padding to the left of lists */
+    margin: 5px;; /* Remove default margin */
+
+}
+
+
+
+/* TIMESTAMP */
+.messages__timestamp {
+    font-size: 0.65rem; /* Decrease font size for better readability */
+    color: #888;
+    margin-top: 2px; /* Reduce margin to bring it closer to the message */
+    width: 100%; /* Ensure the timestamp takes the full width */
+    font-family: 'Arial', sans-serif; /* Use a more traditional font */
+    text-align: right; /* Align timestamp to the right */
+    text-align: right; /* Align timestamp to the right */
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 10px; /* Add some space between messages */
+}
+
+.message-container.operator {
+    align-items: flex-start; /* Align operator messages to the left */
+}
+
+.operator-timestamp {
+    text-align: left; /* Align timestamp to the left for operator messages */
+}
+
+.visitor-timestamp {
+    text-align: right; /* Align timestamp to the right for visitor messages */
+}
+
+/* FOOTER */
+.chatbox__footer {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: var(--secondaryGradient);
+    box-shadow: var(--secondaryBoxShadow);
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-top: 0;
+}
+
+.chatbox__footer input {
+    width: calc(100% - 50px); /* Adjust width to leave space for the send button */
+    padding: 10px;
+    border-radius: 30px;
+    text-align: left;
+    margin-right: 10px;
+    flex-grow: 1;
+}
+
+.chatbox__send--footer {
+    color: white;
+    width: 40px; /* Adjust width for the send button */
+    height: 40px; /* Adjust height for the send button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+/* HEADER */
+.chatbox__header {
+    background: var(--primaryGradient);
+    display: flex;
+    align-items: center; /* vertical alignment */
+    justify-content: space-between; /* space between logo and status area */
+    padding: 10px 15px; /* Reduced padding */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: var(--primaryBoxShadow);
+    position: relative;
+}
+
+.chatbox__image--header {
+    margin-right: 8px; /* Reduced margin */
+    flex-shrink: 0; /* Prevent the logo from shrinking */
+}
+
+.chatbox__content--header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the start (left) */
+    flex-grow: 1; /* Allow the content to grow */
+    margin-left: 8px; /* Reduced margin */
+}
+
+.chatbox__heading--header {
+    display: flex;
+    flex-direction: row; /* Change from column to row */
+    align-items: center; /* Vertically center the texts */
+    justify-content: center;
+    gap: 8px; /* Reduced gap */
+    color: white;
+    margin: 0; /* Remove default margin */
+    font-size: 1.9rem; /* Adjusted font size */
+}
+
+.chatbox__description--header {
+    font-size: 1rem; /* Reduced font size */
+    color: white;
+    margin: 0; /* Remove default margin */
+}
+
+.chatbox__status {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 0; /* Move the status indicator to the upper right */
+    position: absolute;
+    top: 8px; /* Adjusted position */
+    right: 8px; /* Adjusted position */
+}
+
+#chatbot-status {
+    font-size: 0.7rem; /* Make the font size slightly bigger */
+    padding: 3px 7px; /* Adjust padding for better readability */
+    border-radius: 5px; /* Adjust border radius */
+    color: white;
+}
+
+#chatbot-status.online {
+    background-color: green;
+}
+
+#chatbot-status.offline {
+    background-color: red;
+}
+
+#faq-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.disclaimer {
+    font-weight: 600;
+    font-size: 1.4rem; /* Increase font size */
+    margin: 20px 0; /* Add margin to the top and bottom */
+    color: #333;
+    padding: 20px; /* Increase padding for better readability */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#faq-section h4 {
+    font-size: 1.3rem; /* Increase the font size of the heading */
+    margin-bottom: 15px;
+    color: #007BFF;
+    font-weight: 700;
+}
+
+#faq-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 10px;
+    justify-items: center; /* Center-align the items */
+}
+
+.faq-item {
+    cursor: pointer;
+    color: white;
+    background-color: #007BFF;
+    padding: 14px 20px; /* Increase padding */
+    border-radius: 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem; /* Increase font size */
+    white-space: normal; /* Allow the text to wrap */
+    text-align: center; /* Center-align the text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .chatbox {
+        bottom: 10px;
+        right: 10px;
+        left: 10px; /* Center the chatbox horizontally */
+        width: calc(100% - 20px); /* Ensure chatbox takes full width on mobile with some padding */
+    }
+
+    .chatbox__support {
+        width: 100%;
+        height: 60vh;
+    }
+
+    .chatbox__header, .chatbox__footer {
+        padding: 10px;
+    }
+
+    .chatbox__footer input {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .chatbox__button img {
+        width: 45px;
+    }
+
+    .messages__item {
+        max-width: 100%; /* Ensure messages take full width on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbox {
+        bottom: 5px;
+        right: 5px;
+        left: 5px; /* Center the chatbox horizontally */
+        width: calc(100% - 10px); /* Ensure chatbox takes full width on mobile with some padding */
+    }
+
+    .chatbox__support {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .chatbox__header, .chatbox__footer {
+        padding: 8px;
+    }
+
+    .chatbox__footer input {
+        padding: 6px;
+        font-size: 0.8rem;
+    }
+
+    .chatbox__button img {
+        width: 40px;
+    }
+
+    .messages__item {
+        max-width: 100%; /* Ensure messages take full width on mobile */
+    }
+}
